@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Snake Master NFT Staking</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0e0e0e;
+      color: #fff;
+    }
+    .header {
+      background: #111;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+    }
+    .menu-icon {
+      cursor: pointer;
+      font-size: 24px;
+      margin-right: 15px;
+    }
+    .title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .banner {
+      width: 100%;
+      height: 200px;
+      background: url("https://ipfs.io/ipfs/bafybeiejdkgnx634gwsmqxlnxu3zjb633wudxscurlgfvantjdua3w66sa") no-repeat center center;
+      background-size: cover;
+    }
+    .content {
+      padding: 20px;
+      text-align: center;
+    }
+    .btn {
+      padding: 12px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .btn-wallet {
+      background: #2a9d8f;
+      color: white;
+    }
+    .btn-claim {
+      background: #e9c46a;
+      color: black;
+    }
+    .btn-shop {
+      background: #264653;
+      color: white;
+    }
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: #1b1b1b;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+      z-index: 999;
+    }
+    .sidebar a {
+      padding: 12px 20px;
+      text-decoration: none;
+      font-size: 16px;
+      color: #ddd;
+      display: block;
+      transition: 0.2s;
+    }
+    .sidebar a:hover {
+      background: #333;
+    }
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #fff;
+    }
+  </style>
+
+  <!-- Load wax.js versi stabil -->
+  <script src="https://cdn.jsdelivr.net/npm/@waxio/waxjs@1.0.2/dist/waxjs.min.js"></script>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <span class="menu-icon" onclick="openSidebar()">☰</span>
+    <div class="title">Snake Master NFT</div>
+  </div>
+
+  <!-- Banner -->
+  <div class="banner"></div>
+
+  <!-- Sidebar -->
+  <div id="sidebar" class="sidebar">
+    <span class="close-btn" onclick="closeSidebar()">×</span>
+    <a href="#">Staking NFT</a>
+    <a href="#">Unstake NFT</a>
+    <a href="#claim">Claim Reward</a>
+    <a href="#">Inventory</a>
+    <a href="https://neftyblocks.com/collection/packbadgesnk/drops" target="_blank">Shop</a>
+    <a href="#">Setting: Bahasa</a>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    <h2>Selamat datang di Snake Master NFT Staking</h2>
+    <p>Koleksi: <b>packbadgesnk</b></p>
+
+    <!-- Tombol Login Wallet -->
+    <button id="login-wombat" class="btn btn-wallet">Login dengan Wombat</button>
+    <button id="login-cloud" class="btn btn-wallet">Login dengan Cloud Wallet</button>
+
+    <!-- Claim -->
+    <div id="claim">
+      <h3>Reward Anda</h3>
+      <button class="btn btn-claim">Claim Reward</button>
+    </div>
+
+    <!-- Shop -->
+    <p>
+      <a href="https://neftyblocks.com/collection/packbadgesnk/drops" target="_blank">
+        <button class="btn btn-shop">Buka Shop</button>
+      </a>
+    </p>
+  </div>
+
+  <script>
+    // Sidebar
+    function openSidebar() {
+      document.getElementById("sidebar").style.width = "250px";
+    }
+    function closeSidebar() {
+      document.getElementById("sidebar").style.width = "0";
+    }
+
+    // Inisialisasi wax.js
+    let wax;
+    try {
+      wax = new waxjs.WaxJS({
+        rpcEndpoint: "https://wax.greymass.com",
+      });
+    } catch (e) {
+      console.error("waxjs gagal diinisialisasi:", e);
+    }
+
+    // Login dengan Wombat
+    document.getElementById("login-wombat").addEventListener("click", async () => {
+      console.log("Tombol Wombat diklik");
+      alert("Tombol Wombat berhasil diklik (belum ada fungsi login).");
+    });
+
+    // Login dengan Cloud Wallet
+    document.getElementById("login-cloud").addEventListener("click", async () => {
+      console.log("Tombol Cloud diklik");
+      if (!wax) {
+        alert("wax.js belum terload.");
+        return;
+      }
+      try {
+        const account = await wax.login();
+        console.log("Login Cloud berhasil:", account);
+        alert(`Login berhasil sebagai: ${account}`);
+      } catch (err) {
+        console.error("Login gagal:", err);
+        alert("Login gagal, coba lagi!");
+      }
+    });
+  </script>
+</body>
+</html>
